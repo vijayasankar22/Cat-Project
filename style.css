@@ -9,11 +9,13 @@ html {
 }
 
 body {
-  background-color: #fff0f6;
+  background: radial-gradient(circle at top, #ffe3f1, #fff0f6 50%, #fff7fb 100%);
   font-family: "Protest Riot", sans-serif;
+  overflow: hidden;
 }
 
 .container {
+  position: relative;
   height: 100vh;
   margin: 0 auto;
 
@@ -21,12 +23,20 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: transform 220ms ease;
 }
 
 .cat-img {
   width: 30rem;
   height: 30rem;
   margin-bottom: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 1.2rem 3.2rem rgba(240, 62, 62, 0.2);
+  transition: transform 260ms ease, box-shadow 260ms ease;
+}
+
+.cat-img.pop {
+  animation: catPop 400ms ease;
 }
 
 .title {
@@ -34,6 +44,11 @@ body {
   color: #f53699;
   text-align: center;
   margin-bottom: 2rem;
+  text-shadow: 0 0.5rem 1.2rem rgba(245, 54, 153, 0.2);
+}
+
+.title.celebrate {
+  animation: pulseGlow 850ms ease infinite;
 }
 
 .buttons {
@@ -41,6 +56,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   gap: 1rem;
 }
@@ -48,23 +64,97 @@ body {
 .btn {
   padding: 1.5rem 2.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 999px;
 
   color: white;
   font-size: 1.6rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-block;
+  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.2);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .btn--yes {
   background-color: #40c057;
 }
 
+.btn--yes.grow-pulse {
+  animation: yesPulse 700ms ease;
+}
+
 .btn--no {
   background-color: #f03e3e;
 }
 
+.heart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 2.4rem;
+  pointer-events: none;
+  animation: floatUp 1500ms ease-out forwards;
+  z-index: 20;
+}
+
 .hidden {
   display: none;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.7);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-16rem) scale(1.5) rotate(15deg);
+  }
+}
+
+@keyframes catPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.08) rotate(-1deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0.4rem 1rem rgba(245, 54, 153, 0.25);
+  }
+  50% {
+    transform: scale(1.04);
+    text-shadow: 0 0.4rem 2.4rem rgba(245, 54, 153, 0.45);
+  }
+}
+
+@keyframes yesPulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
